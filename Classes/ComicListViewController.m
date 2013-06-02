@@ -17,6 +17,9 @@
 #import "UIAlertView_TLCommon.h"
 #import "FAQViewController.h"
 #import "TLMacros.h"
+#import "UIImage+EXIFCompensation.h"
+#import "BetterRefreshControl.h"
+#import "FetchedAndJumpToResultsController.h"
 
 #define kTableViewBackgroundColor [UIColor colorWithRed:0.69f green:0.737f blue:0.80f alpha:0.5f]
 #define kUserDefaultsSavedTopVisibleComicKey @"topVisibleComic"
@@ -70,13 +73,6 @@ static UIImage *downloadImage = nil;
 
 @implementation ComicListViewController
 
-@synthesize fetcher;
-@synthesize imageFetcher;
-@synthesize fetchedResultsController;
-@synthesize searchFetchedResultsController;
-@synthesize searchController;
-@synthesize requestedLaunchComic;
-
 + (void)initialize {
   if([self class] == [ComicListViewController class]) {
     if(!downloadImage) {
@@ -104,9 +100,11 @@ static UIImage *downloadImage = nil;
 }
 
 - (void)addRefreshControl {
-  self.refreshControl = [[UIRefreshControl alloc] init];
-  [self.refreshControl addTarget:self action:@selector(checkForNewComics) forControlEvents:UIControlEventValueChanged];
-  self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Check for new comics"];
+  BetterRefreshControl *refreshControl = [[BetterRefreshControl alloc] init];
+  [refreshControl addTarget:self action:@selector(checkForNewComics) forControlEvents:UIControlEventValueChanged];
+  [refreshControl attributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"] forRefreshState:UIRefreshControlUtilsStateInactive];
+  [refreshControl attributedTitle:[[NSAttributedString alloc] initWithString:@"Checking for new comics..."] forRefreshState:UIRefreshControlUtilsStateActive];
+  self.refreshControl = refreshControl;
 }
 
 - (void)addNavigationBarButtons {
@@ -177,14 +175,14 @@ static UIImage *downloadImage = nil;
 }
 
 - (void)dealloc {
-  fetcher.delegate = nil;
+  self.fetcher.delegate = nil;
   
-  imageFetcher.delegate = nil;
+  self.imageFetcher.delegate = nil;
   
-  searchController.searchBar.delegate = nil;
-  searchController.delegate = nil;
-  searchController.searchResultsDataSource = nil;
-  searchController.searchResultsDelegate = nil;
+  self.searchController.searchBar.delegate = nil;
+  self.searchController.delegate = nil;
+  self.searchController.searchResultsDataSource = nil;
+  self.searchController.searchResultsDelegate = nil;
 }
 
 - (void)scrollToComicAtIndexPath:(NSIndexPath *)indexPath {
@@ -207,7 +205,7 @@ static UIImage *downloadImage = nil;
   }
   fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"number" ascending:NO]];
   
-  NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+  NSFetchedResultsController *aFetchedResultsController = [[FetchedAndJumpToResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                managedObjectContext:AppDelegate.managedObjectContext
                                                                                                  sectionNameKeyPath:nil
                                                                                                           cacheName:nil];
@@ -372,7 +370,7 @@ static UIImage *downloadImage = nil;
 }
 
 - (UITableView *)tableViewForFetchedResultsController:(NSFetchedResultsController *)controller {
-  return [controller isEqual:searchFetchedResultsController] ? self.searchController.searchResultsTableView : self.tableView;
+  return [controller isEqual:self.searchFetchedResultsController] ? self.searchController.searchResultsTableView : self.tableView;
 }
 
 
@@ -440,6 +438,7 @@ static UIImage *downloadImage = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
   UITableViewCell *cell = nil;
 
   // Comic cell
@@ -454,7 +453,8 @@ static UIImage *downloadImage = nil;
 #endif
   
   Comic *comic = [self comicAtIndexPath:indexPath inTableView:aTableView];
-  comicCell.textLabel.text = [NSString stringWithFormat:@"%i. %@", [comic.number integerValue], comic.name];
+    
+  comicCell.textLabel.text = comic.displayString;
   comicCell.textLabel.font = [UIFont systemFontOfSize:16];
   comicCell.textLabel.adjustsFontSizeToFitWidth = YES;
   
@@ -549,6 +549,10 @@ static UIImage *downloadImage = nil;
   if([sections count] > 0) {
     id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
     numberOfRows = [sectionInfo numberOfObjects];
+  }
+  if ([fetchedResults respondsToSelector:@selector(hasJumpTo)] && [((FetchedAndJumpToResultsController *)fetchedResults) hasJumpTo])
+  {
+    return numberOfRows + 1;
   }
   return numberOfRows;
 }

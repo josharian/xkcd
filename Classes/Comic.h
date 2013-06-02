@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIImage+EXIFCompensation.h"
 
 #define kMinComicNumber 1
 
-@interface Comic : NSManagedObject {
-}
+@interface Comic : NSManagedObject
 
 + (Comic *)comic; // use this, not init/etc.
 
@@ -40,5 +40,6 @@
 @property(nonatomic, strong, readwrite) NSString *titleText;
 @property(nonatomic, strong, readwrite) NSString *transcript;
 @property(nonatomic, strong, readwrite) NSNumber *number;
-
+@property(nonatomic, readwrite) BOOL jumpTo;
+@property(nonatomic, readonly) NSString *displayString;
 @end

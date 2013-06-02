@@ -9,13 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "NewComicFetcherDelegate.h"
 
-@interface NewComicFetcher : NSObject {
-@private
-  id<NewComicFetcherDelegate> __weak delegate;
-  NSOperationQueue *fetchQueue;
-  NSMutableArray *comicsToInsert; // don't insert 1-by-1 -- crappy user experience -- insert in chunks
-}
+#define kInsertChunkSize 25  // when [comicsToInsert count] reaches kInsertChunkSize, comics will be inserted
 
+@interface NewComicFetcher : NSObject
+  
 - (void)fetch;
 
 @property(nonatomic, weak, readwrite) id<NewComicFetcherDelegate> delegate;
