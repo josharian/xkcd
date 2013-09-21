@@ -12,7 +12,6 @@
 #import "TLMacros.h"
 #import "Comic.h"
 #import "TLNavigationController.h"
-#import "NotificationGenerator.h"
 
 #define kUserDefaultsRotateKey @"rotate"
 #define kUserDefaultsOpenZoomedOutKey @"zoomed_out"
@@ -47,7 +46,7 @@ static NSString *applicationDocumentsDirectory = nil;
 
   BOOL canLaunchApplication = YES;
   if(launchOptions) {
-    NSURL *launchURL = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    NSURL *launchURL = launchOptions[UIApplicationLaunchOptionsURLKey];
     if(![[launchURL scheme] isEqual: @"xkcd"]) {
       canLaunchApplication = NO;
     }
@@ -64,25 +63,18 @@ static NSString *applicationDocumentsDirectory = nil;
   self.window.rootViewController = navigationController;
   [self.window addSubview:navigationController.view];
   [self.window makeKeyAndVisible];
-
-  [NotificationGenerator clearAppBadge];
   
   return canLaunchApplication;
 }
 
 - (void) applicationWillResignActive:(UIApplication *)application
-{
-  [NotificationGenerator generateNextNotification];
-}
+{ }
 
 
 /**
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
-  // schedule the next notification
-  [NotificationGenerator generateNextNotification];
-  
   [[NSUserDefaults standardUserDefaults] synchronize];
 
   NSError *error = nil;
@@ -95,14 +87,13 @@ static NSString *applicationDocumentsDirectory = nil;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [Comic synchronizeDownloadedImages];
-  [NotificationGenerator clearAppBadge];
 }
 
 #pragma mark -
 #pragma mark UserDefaults access
 
 - (BOOL)rotate {
-  if(![[self.userDefaults dictionaryRepresentation] objectForKey:kUserDefaultsRotateKey]) {
+  if(![self.userDefaults dictionaryRepresentation][kUserDefaultsRotateKey]) {
     [self.userDefaults setBool:YES forKey:kUserDefaultsRotateKey];
     [self.userDefaults synchronize];
   }
@@ -110,7 +101,7 @@ static NSString *applicationDocumentsDirectory = nil;
 }
 
 - (BOOL)openZoomedOut {
-  if(![[self.userDefaults dictionaryRepresentation] objectForKey:kUserDefaultsOpenZoomedOutKey]) {
+  if(![self.userDefaults dictionaryRepresentation][kUserDefaultsOpenZoomedOutKey]) {
     [self.userDefaults setBool:NO forKey:kUserDefaultsOpenZoomedOutKey];
     [self.userDefaults synchronize];
   }
@@ -118,7 +109,7 @@ static NSString *applicationDocumentsDirectory = nil;
 }
 
 - (BOOL)downloadNewComics {
-  if(![[self.userDefaults dictionaryRepresentation] objectForKey:kUserDefaultsAutodownloadKey]) {
+  if(![self.userDefaults dictionaryRepresentation][kUserDefaultsAutodownloadKey]) {
     [self.userDefaults setBool:NO forKey:kUserDefaultsAutodownloadKey];
     [self.userDefaults synchronize];
   }
@@ -126,7 +117,7 @@ static NSString *applicationDocumentsDirectory = nil;
 }
 
 - (BOOL)openAfterDownload {
-  if(![[self.userDefaults dictionaryRepresentation] objectForKey:kUserDefaultsOpenAfterDownloadKey]) {
+  if(![self.userDefaults dictionaryRepresentation][kUserDefaultsOpenAfterDownloadKey]) {
     [self.userDefaults setBool:YES forKey:kUserDefaultsOpenAfterDownloadKey];
     [self.userDefaults synchronize];
   }
@@ -249,7 +240,7 @@ static NSString *applicationDocumentsDirectory = nil;
 - (NSString *)applicationDocumentsDirectory {
   if(!applicationDocumentsDirectory) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    NSString *basePath = ([paths count] > 0) ? paths[0] : nil;
     if(basePath) {
       applicationDocumentsDirectory = basePath;
     }

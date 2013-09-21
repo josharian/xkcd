@@ -243,12 +243,11 @@
   NSMutableArray *viewControllerStack = [self.navigationController.viewControllers mutableCopy];
   Comic *newComic = [Comic comicNumbered:comicNumber];
   SingleComicViewController *newSingleComicViewController = [[SingleComicViewController alloc] initWithComic:newComic]; 
-  [viewControllerStack replaceObjectAtIndex:[viewControllerStack count] - 1
-                                 withObject:newSingleComicViewController];
+  viewControllerStack[[viewControllerStack count] - 1] = newSingleComicViewController;
   [self.navigationController setViewControllers:viewControllerStack animated:NO];
 
   // deselect any selected rows, to avoid ugliness (still kinda ugly, but it'll have to be good enough for now, need to release)
-  ComicListViewController *comicList = [viewControllerStack objectAtIndex:0];
+  ComicListViewController *comicList = viewControllerStack[0];
   [comicList.tableView deselectRowAtIndexPath:[comicList.tableView indexPathForSelectedRow] animated:NO];
 }
 
