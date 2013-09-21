@@ -18,8 +18,6 @@
 #import "FAQViewController.h"
 #import "TLMacros.h"
 #import "UIImage+EXIFCompensation.h"
-#import "BetterRefreshControl.h"
-#import "FetchedAndJumpToResultsController.h"
 
 #define kTableViewBackgroundColor [UIColor colorWithRed:0.69f green:0.737f blue:0.80f alpha:0.5f]
 #define kUserDefaultsSavedTopVisibleComicKey @"topVisibleComic"
@@ -100,10 +98,10 @@ static UIImage *downloadImage = nil;
 }
 
 - (void)addRefreshControl {
-  BetterRefreshControl *refreshControl = [[BetterRefreshControl alloc] init];
+  UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(checkForNewComics) forControlEvents:UIControlEventValueChanged];
-  [refreshControl attributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"] forRefreshState:UIRefreshControlUtilsStateInactive];
-  [refreshControl attributedTitle:[[NSAttributedString alloc] initWithString:@"Checking for new comics..."] forRefreshState:UIRefreshControlUtilsStateActive];
+  [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"]];
+  
   self.refreshControl = refreshControl;
 }
 
@@ -205,7 +203,7 @@ static UIImage *downloadImage = nil;
   }
   fetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"number" ascending:NO]];
   
-  NSFetchedResultsController *aFetchedResultsController = [[FetchedAndJumpToResultsController alloc] initWithFetchRequest:fetchRequest
+  NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                                                managedObjectContext:AppDelegate.managedObjectContext
                                                                                                  sectionNameKeyPath:nil
                                                                                                           cacheName:nil];
@@ -549,10 +547,6 @@ static UIImage *downloadImage = nil;
   if([sections count] > 0) {
     id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
     numberOfRows = [sectionInfo numberOfObjects];
-  }
-  if ([fetchedResults respondsToSelector:@selector(hasJumpTo)] && [((FetchedAndJumpToResultsController *)fetchedResults) hasJumpTo])
-  {
-    return numberOfRows + 1;
   }
   return numberOfRows;
 }

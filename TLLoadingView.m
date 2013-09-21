@@ -47,10 +47,14 @@
   
   CGFloat spinnerToLabelPadding = spinnerSize.width / 2.0f;
   CGFloat horizontalPadding = spinnerToLabelPadding; // required distance between left/right edge of view and spinner/label
-  CGFloat maxLabelWidth = viewWidth - spinnerSize.width - horizontalPadding * 2.0f - spinnerToLabelPadding; 
-  CGSize renderedLabelSize = [self.label.text sizeWithFont:self.label.font
-                                         constrainedToSize:CGSizeMake(maxLabelWidth, viewHeight)
-                                             lineBreakMode:self.label.lineBreakMode];
+  CGFloat maxLabelWidth = viewWidth - spinnerSize.width - horizontalPadding * 2.0f - spinnerToLabelPadding;
+  
+  NSDictionary *renderedLabelSizeFrameAttributesDictionary = @{NSFontAttributeName : self.label.font};
+  CGRect renderedLabelSizeFrame = [self.label.text boundingRectWithSize:CGSizeMake(maxLabelWidth, viewHeight)
+                                    options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                 attributes:renderedLabelSizeFrameAttributesDictionary
+                                    context:nil];
+  CGSize renderedLabelSize = renderedLabelSizeFrame.size;
   
   CGFloat spinnerPlusLabelWidth = spinnerSize.width + spinnerToLabelPadding + renderedLabelSize.width;
   CGFloat spinnerXOffset = OffsetToCenterFloatInFloat(spinnerPlusLabelWidth, viewWidth);

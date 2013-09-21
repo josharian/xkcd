@@ -175,7 +175,7 @@
 
   if(self.comic.transcript.length == 0) {
     self.view.accessibilityLabel = @"Transcript not available";
-    NSLog(@"Missing transcript for comic %i", self.comic.number.integerValue);
+    NSLog(@"Missing transcript for comic %li", (long)self.comic.number.integerValue);
   } else {
     self.view.accessibilityLabel = self.comic.transcript; // TODO: Clean up the transcript some for a more pleasant listening experience
   }
@@ -299,7 +299,7 @@
   return self.contentView;
 }
 
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale {
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
 }
 
 @end
