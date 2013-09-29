@@ -100,7 +100,7 @@ static UIImage *downloadImage = nil;
 - (void)addRefreshControl {
   UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(checkForNewComics) forControlEvents:UIControlEventValueChanged];
-  [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"]];
+  [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Check for new comics", @"Refresh control title")]];
   
   self.refreshControl = refreshControl;
 }
@@ -450,7 +450,7 @@ static UIImage *downloadImage = nil;
 #endif
   
   Comic *comic = [self comicAtIndexPath:indexPath inTableView:aTableView];
-  comicCell.textLabel.text = [NSString stringWithFormat:@"%i. %@", [comic.number integerValue], comic.name];
+  comicCell.textLabel.text = [NSString stringWithFormat:@"%li. %@", (long)[comic.number integerValue], comic.name];
   comicCell.textLabel.font = [UIFont systemFontOfSize:16];
   comicCell.textLabel.adjustsFontSizeToFitWidth = YES;
   

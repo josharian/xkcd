@@ -1,0 +1,44 @@
+/*
+ Localizable.strings
+ xkcd
+ 
+ Created by Paul Rehkugler on 9/23/13.
+ 
+ */
+
+// TODO: need translations
+
+@"xkcd" : @"xkcd (japanese)";  // title of main view
+@"Search xkcd" : @"Search xkcd (japanese)";  // search bar placeholder text
+@"Check for new comics" : @"Check for new comics (japanese)";  // refresh control title
+@"Email the app developer (japanese)" : @"Email the app developer"; // action sheet title
+@"Read the FAQ" : @"Read the FAQ (japanese)";  // action sheet title
+@"Write App Store review" : @"Write App Store review (japanese)" // action sheet title
+@"Share link to this app" : @"Share link to this app (japanese)" // action sheet title
+@"Download all" : @"Download all (japanese)" // bar button title
+@"Delete all" : @"Delete all (japanese)" // bar button title
+@"Cancel download all" : @"Cancel download all (japanese)" // bar button title
+@"Downloading all images may take up considerable space on your device." : @"Downloading all images may take up considerable space on your device. (japanese)" // confirm download all sheet title
+@"Download all images" : @"Download all images (japanese)" // confirm download all button
+@"Delete all images" : @"Delete all images (japanese)" // confirm delete all button
+@"Opens the comic" : @"Opens the comic (japanese)" // downloaded comic accessibility hint
+@"Waiting for download" : @"Waiting for download (japanese)" // downloading comic accessibility hint
+@"Downloads the comic" : @"Downloads the comic (japanese)" // undownloaded comic accessibility hint
+@"Delete image" : @"Delete image (japanese)" // delete button title
+@"Feedback on xkcd app (version %@)" : @"Feedback on xkcd app (version %@)  (japanese)" // subject of feedback email
+@"Do me a favor?" : @"Do me a favor? (japanese)" // alert title
+@"Take a look at the FAQ before emailing. Thanks!" : @"Take a look at the FAQ before emailing. Thanks! (japanese)" // alert body
+@"Deleting..." : @"Deleting... (japanese)" // modal spinner text
+@"FAQ" : @"FAQ (japanese)" // faq view controller title
+@"Cancel" : @"Cancel (japanese)" // action sheet cancel button
+@"Open in Chrome" : @"Open in Chrome (japanese)" // open in chrome activity title
+@"Open in Safari" : @"Open in Safari (japanese)" // open in safari activity title
+@"Whoops" : @"Whoops (japanese)" // title of image download fail alert
+@"Could not download xkcd %i." : @"Could not download xkcd %i. (japanese)" // text of unknown error image download fail alert
+@"Could not download xkcd %i -- no internet connection." : @"Could not download xkcd %i -- no internet connection. (japanese)" // text of image fail due to connectivity
+@"Older comic" : @"Older comic (japanese)" // older comic accessibility label
+@"Random comic" : @"Random comic (japanese)" // random comic accessibility label
+@"Newer comic" : @"Newer comic (japanese)" // newer comic accessibility label
+@"Transcript not available" : @"Transcript not available (japanese)" // missing transcript accessibility label
+@"Loading..." : @"Loading... (japanese)" // default text of loading view
+@"Ok" : @"Ok (japanese)" // button to acknowledge modal alert

@@ -14,7 +14,7 @@
 }
 
 - (NSString *)activityTitle {
-  return @"Open in Safari";
+  return NSLocalizedString(@"Open in Safari", @"Open in Safari Activity Title");
 }
 
 - (void)performActivity {
