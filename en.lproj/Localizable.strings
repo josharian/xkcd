@@ -1,42 +1,42 @@
 /*
- Localizable.strings
+ Localizable.strings (English)
  xkcd
  
  Created by Paul Rehkugler on 9/23/13.
  
  */
 
-@"xkcd" : @"xkcd";  // title of main view
-@"Search xkcd" : @"Search xkcd";  // search bar placeholder text
-@"Check for new comics" : @"Check for new comics";  // refresh control title
-@"Email the app developer" : @"Email the app developer"; // action sheet title
-@"Read the FAQ" : @"Read the FAQ";  // action sheet title
-@"Write App Store review" : @"Write App Store review" // action sheet title
-@"Share link to this app" : @"Share link to this app" // action sheet title
-@"Download all" : @"Download all" // bar button title
-@"Delete all" : @"Delete all" // bar button title
-@"Cancel download all" : @"Cancel download all" // bar button title
-@"Downloading all images may take up considerable space on your device." : @"Downloading all images may take up considerable space on your device." // confirm download all sheet title
-@"Download all images" : @"Download all images" // confirm download all button
-@"Delete all images" : @"Delete all images" // confirm delete all button
-@"Opens the comic" : @"Opens the comic" // downloaded comic accessibility hint
-@"Waiting for download" : @"Waiting for download" // downloading comic accessibility hint
-@"Downloads the comic" : @"Downloads the comic" // undownloaded comic accessibility hint
-@"Delete image" : @"Delete image" // delete button title
-@"Feedback on xkcd app (version %@)" : @"Feedback on xkcd app (version %@)" // subject of feedback email
-@"Do me a favor?" : @"Do me a favor?" // alert title
-@"Take a look at the FAQ before emailing. Thanks!" : @"Take a look at the FAQ before emailing. Thanks!" // alert body
-@"Deleting..." : @"Deleting..." // modal spinner text
-@"FAQ" : @"FAQ" // faq view controller title
-@"Cancel" : @"Cancel" // action sheet cancel button
-@"Open in Chrome" : @"Open in Chrome" // open in chrome activity title
-@"Open in Safari" : @"Open in Safari" // open in safari activity title
-@"Whoops" : @"Whoops" // title of image download fail alert
-@"Could not download xkcd %i." : @"Could not download xkcd %i." // text of unknown error image download fail alert
-@"Could not download xkcd %i -- no internet connection." : @"Could not download xkcd %i -- no internet connection." // text of image fail due to connectivity
-@"Older comic" : @"Older comic" // older comic accessibility label
-@"Random comic" : @"Random comic" // random comic accessibility label
-@"Newer comic" : @"Newer comic" // newer comic accessibility label
-@"Transcript not available" : @"Transcript not available" // missing transcript accessibility label
-@"Loading..." : @"Loading..." // default text of loading view
-@"Ok" : @"Ok" // button to acknowledge modal alert
+"xkcd"                                 = "xkcd";                                        // title of main view
+"Search xkcd"                          = "Search xkcd";                                 // search bar placeholder text
+"Check for new comics"                 = "Check for new comics";                        // refresh control title
+"Email the app developer"              = "Email the app developer";                     // action sheet title
+"Read the FAQ"                         = "Read the FAQ";                                // action sheet title
+"Write App Store review"               = "Write App Store review";                      // action sheet title
+"Share link to this app"               = "Share link to this app";                      // action sheet title
+"Download all"                         = "Download all";                                // bar button title
+"Delete all"                           = "Delete all";                                  // bar button title
+"Cancel download all"                  = "Cancel download all";                         // bar button title
+"Downloading all images may take up considerable space on your device." = "Downloading all images may take up considerable space on your device.";
+"Download all images"                  = "Download all images";                         // confirm download all button
+"Delete all images"                    = "Delete all images";                           // confirm delete all button
+"Opens the comic"                      = "Opens the comic";                             // downloaded comic accessibility hint
+"Waiting for download"                 = "Waiting for download";                        // downloading comic accessibility hint
+"Downloads the comic"                  = "Downloads the comic";                         // undownloaded comic accessibility hint
+"Delete image"                         = "Delete image";                                // delete button title
+"Feedback on xkcd app (version %)"    = "Feedback on xkcd app (version %)";             // subject of feedback email
+"Do me a favor?"                       = "Do me a favor?";                              // alert title
+"Take a look at the FAQ before emailing. Thanks!" = "Take a look at the FAQ before emailing. Thanks!"; // alert body
+"Deleting..."                          = "Deleting...";                                 // modal spinner text
+"FAQ"                                  = "FAQ";                                         // faq view controller title
+"Cancel"                               = "Cancel";                                      // action sheet cancel button
+"Open in Chrome"                       = "Open in Chrome";                              // open in chrome activity title
+"Open in Safari"                       = "Open in Safari";                              // open in safari activity title
+"Whoops"                               = "Whoops";                                      // title of image download fail alert
+"Could not download xkcd %i."          = "Could not download xkcd %i.";                 // text of unknown error image download fail alert
+"Could not download xkcd %i -- no internet connection." = "Could not download xkcd %i -- no internet connection."; // text of image fail due to connectivity
+"Older comic"                          = "Older comic";                                 // older comic accessibility label
+"Random comic"                         = "Random comic";                                // random comic accessibility label
+"Newer comic"                          = "Newer comic";                                 // newer comic accessibility label
+"Transcript not available"             = "Transcript not available";                    // missing transcript accessibility label
+"Loading..."                           = "Loading...";                                  // default text of loading view
+"Ok"                                   = "Ok";                                          // button to acknowledge modal alert
