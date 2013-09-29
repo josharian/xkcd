@@ -452,8 +452,7 @@ static UIImage *downloadImage = nil;
   
   Comic *comic = [self comicAtIndexPath:indexPath inTableView:aTableView];
     
-  comicCell.textLabel.text = comic.titleText;
-  comicCell.textLabel.font = [UIFont systemFontOfSize:16];
+  comicCell.textLabel.text = [NSString stringWithFormat:@"%li. %@", (long)[comic.number integerValue], comic.name];  comicCell.textLabel.font = [UIFont systemFontOfSize:16];
   comicCell.textLabel.adjustsFontSizeToFitWidth = YES;
   
   if([comic.number integerValue] == 404) {
