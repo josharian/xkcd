@@ -11,7 +11,7 @@
 @"xkcd" : @"xkcd (japanese)";  // title of main view
 @"Search xkcd" : @"Search xkcd (japanese)";  // search bar placeholder text
 @"Check for new comics" : @"Check for new comics (japanese)";  // refresh control title
-@"Email the app developer (japanese)" : @"Email the app developer"; // action sheet title
+@"Email the app developer" : @"Email the app developer (japanese)"; // action sheet title
 @"Read the FAQ" : @"Read the FAQ (japanese)";  // action sheet title
 @"Write App Store review" : @"Write App Store review (japanese)" // action sheet title
 @"Share link to this app" : @"Share link to this app (japanese)" // action sheet title
