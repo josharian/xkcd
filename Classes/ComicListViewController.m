@@ -18,7 +18,6 @@
 #import "FAQViewController.h"
 #import "TLMacros.h"
 #import "UIImage+EXIFCompensation.h"
-#import "BetterRefreshControl.h"
 
 #define kTableViewBackgroundColor [UIColor colorWithRed:0.69f green:0.737f blue:0.80f alpha:0.5f]
 #define kUserDefaultsSavedTopVisibleComicKey @"topVisibleComic"
@@ -99,10 +98,10 @@ static UIImage *downloadImage = nil;
 }
 
 - (void)addRefreshControl {
-  BetterRefreshControl *refreshControl = [[BetterRefreshControl alloc] init];
+  UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(checkForNewComics) forControlEvents:UIControlEventValueChanged];
-  [refreshControl attributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"] forRefreshState:UIRefreshControlUtilsStateInactive];
-  [refreshControl attributedTitle:[[NSAttributedString alloc] initWithString:@"Checking for new comics..."] forRefreshState:UIRefreshControlUtilsStateActive];
+  [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"]];
+  
   self.refreshControl = refreshControl;
 }
 
@@ -451,7 +450,7 @@ static UIImage *downloadImage = nil;
 #endif
   
   Comic *comic = [self comicAtIndexPath:indexPath inTableView:aTableView];
-  comicCell.textLabel.text = [NSString stringWithFormat:@"%i. %@", [comic.number integerValue], comic.name];
+  comicCell.textLabel.text = [NSString stringWithFormat:@"%li. %@", (long)[comic.number integerValue], comic.name];
   comicCell.textLabel.font = [UIFont systemFontOfSize:16];
   comicCell.textLabel.adjustsFontSizeToFitWidth = YES;
   
@@ -544,7 +543,7 @@ static UIImage *downloadImage = nil;
   NSArray *sections = [fetchedResults sections];
   NSUInteger numberOfRows = 0;
   if([sections count] > 0) {
-    id<NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:section];
+    id<NSFetchedResultsSectionInfo> sectionInfo = sections[section];
     numberOfRows = [sectionInfo numberOfObjects];
   }
   return numberOfRows;

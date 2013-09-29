@@ -43,11 +43,11 @@
 
 - (UIImage *)imageAtXIndex:(NSUInteger)xIndex YIndex:(NSUInteger)yIndex {
   if(xIndex >= self.widthCount || yIndex >= self.heightCount) {
-    NSLog(@"Requested out of bounds image: (%i,%i) doesn't exist -- max is (%i, %i)", xIndex, yIndex, self.widthCount, self.heightCount);
+    NSLog(@"Requested out of bounds image: (%lu,%lu) doesn't exist -- max is (%lu, %lu)", (unsigned long)xIndex, (unsigned long)yIndex, (unsigned long)self.widthCount, (unsigned long)self.heightCount);
     return nil;
   }
   NSUInteger tileIndex = TILE_INDEX(xIndex, yIndex);
-  id currentTile = [self.tiles objectAtIndex:tileIndex];
+  id currentTile = (self.tiles)[tileIndex];
   if(currentTile != [NSNull null]) {
     // Been loaded already, return it
     return currentTile;
@@ -57,7 +57,7 @@
     CGImageRef tileCGImage = CGImageCreateWithImageInRect(self.sourceImage.CGImage, tileRect);
     UIImage *newTile = [UIImage imageWithCGImage:tileCGImage];
     CFRelease(tileCGImage);
-    [self.tiles replaceObjectAtIndex:tileIndex withObject:newTile];
+    (self.tiles)[tileIndex] = newTile;
     return newTile;
   }
 }
