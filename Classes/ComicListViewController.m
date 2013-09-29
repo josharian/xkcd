@@ -100,7 +100,7 @@ static UIImage *downloadImage = nil;
 - (void)addRefreshControl {
   UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
   [refreshControl addTarget:self action:@selector(checkForNewComics) forControlEvents:UIControlEventValueChanged];
-  [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Check for new comics"]];
+  [refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:NSLocalizedString(@"Check for new comics", @"Refresh control title")]];
   
   self.refreshControl = refreshControl;
 }

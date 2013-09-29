@@ -1,0 +1,9 @@
+/* 
+  xkcd-dev-infoPlist.strings
+  xkcd
+
+  Created by Paul Rehkugler on 9/29/13.
+
+*/
+
+"CFBundleDisplayName" = "xkcd (japanese)";

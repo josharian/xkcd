@@ -12,7 +12,7 @@
 }
 
 - (NSString *)activityTitle {
-  return @"Open in Chrome";
+  return NSLocalizedString(@"Open in Chrome", @"Open in Chrome Activity Title");
 }
 
 - (BOOL)canPerformWithActivityItems:(NSArray *)activityItems {
