@@ -74,7 +74,6 @@
     NSString *explanationHTML = [headerImage stringByAppendingString:self.comic.explanation];
         
     [self.explanationView loadHTMLString:explanationHTML baseURL:[NSURL URLWithString:@"http://www.explainxkcd.com"]];
-    [self.explanationView setFrame:self.view.frame];
     [self.view addSubview:self.explanationView];
 }
 
