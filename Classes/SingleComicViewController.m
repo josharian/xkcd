@@ -80,6 +80,11 @@
   }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.contentView.hidden = NO;
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
   [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -255,6 +260,7 @@
 
 - (void)explainComic {
     ExplainComicViewController *explainComicViewController = [[ExplainComicViewController alloc] initWithComic:self.comic];
+    self.contentView.hidden = YES;  // Hide the comic because it doesn't transition well
     [self.navigationController pushViewController:explainComicViewController animated:YES];
 }
 
