@@ -64,7 +64,7 @@
 - (void)requestExplanation
 {
     [self.explanationView removeFromSuperview];
-    [self.view addSubview:self.loadingView];
+    [self showLoadingView];
     [self.explanationFetcher fetchExplanationForComic:self.comic];
 }
 
@@ -100,6 +100,28 @@
     return _explanationFetcher;
 }
 
+- (void)showLoadingView
+{
+    [self.view addSubview:self.loadingView];
+    
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:_loadingView
+                                                               attribute:NSLayoutAttributeCenterX
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.view
+                                                               attribute:NSLayoutAttributeCenterX
+                                                              multiplier:1.0
+                                                                constant:0];
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:_loadingView
+                                                               attribute:NSLayoutAttributeCenterY
+                                                               relatedBy:NSLayoutRelationEqual
+                                                                  toItem:self.view
+                                                               attribute:NSLayoutAttributeCenterY
+                                                              multiplier:1.0
+                                                                constant:0];
+    [self.view addConstraint:centerX];
+    [self.view addConstraint:centerY];
+}
+
 
 #pragma mark - Property getters
 
@@ -121,22 +143,6 @@
         _loadingView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [_loadingView startAnimating];
         _loadingView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:_loadingView
-                                                                   attribute:NSLayoutAttributeCenterX
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self.view
-                                                                   attribute:NSLayoutAttributeCenterX
-                                                                  multiplier:1.0
-                                                                    constant:0];
-        NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:_loadingView
-                                                                   attribute:NSLayoutAttributeCenterY
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:self.view
-                                                                   attribute:NSLayoutAttributeCenterY
-                                                                  multiplier:1.0
-                                                                    constant:0];
-        [self.view addConstraint:centerX];
-        [self.view addConstraint:centerY];
     }
 
     return _loadingView;
