@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "UIImage+EXIFCompensation.h"
 
 #define kMinComicNumber 1
@@ -34,12 +35,12 @@
 + (NSString *)imagePathForImageFilename:(NSString *)imageFilename;
 
 @property(nonatomic, strong, readonly) UIImage *image;
-@property(nonatomic, strong, readwrite) NSNumber *loading;
-@property(nonatomic, strong, readwrite) NSString *imageURL;
-@property(nonatomic, strong, readwrite) NSString *name;
-@property(nonatomic, strong, readwrite) NSString *titleText;
-@property(nonatomic, strong, readwrite) NSString *transcript;
-@property(nonatomic, strong, readwrite) NSNumber *number;
-@property(nonatomic, strong, readwrite) NSString *explanation;
+@property (nonatomic, retain) NSNumber * number;
+@property (nonatomic, retain) NSString * transcript;
+@property (nonatomic, retain) NSString * titleText;
+@property (nonatomic, retain) NSNumber * loading;
+@property (nonatomic, retain) NSString * explanation;
+@property (nonatomic, retain) NSString * imageURL;
+@property (nonatomic, retain) NSString * name;
 
 @end

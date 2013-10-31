@@ -38,13 +38,13 @@ static NSMutableSet *downloadedImages = nil;
 
 @implementation Comic
 
-@dynamic name;
-@dynamic titleText;
-@dynamic transcript;
-@dynamic imageURL;
 @dynamic number;
+@dynamic transcript;
+@dynamic titleText;
 @dynamic loading;
 @dynamic explanation;
+@dynamic imageURL;
+@dynamic name;
 
 + (void)initialize {
   if([self class] == [Comic class]) {
