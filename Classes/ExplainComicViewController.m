@@ -51,6 +51,16 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setToolbarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.navigationController setToolbarHidden:NO animated:animated];
+}
+
 - (void)requestExplanation
 {
     [self.explanationView removeFromSuperview];
