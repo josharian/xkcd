@@ -43,6 +43,8 @@
     self.navigationItem.rightBarButtonItem = refresh;
     
 	// Do any additional setup after loading the view.
+    [self.view addSubview:self.explanationView];
+    
     if (self.comic.explanation) {
         [self displayExplanation];
     } else {
@@ -63,7 +65,7 @@
 
 - (void)requestExplanation
 {
-    [self.explanationView removeFromSuperview];
+    self.explanationView.hidden = YES;
     [self showLoadingView];
     [self.explanationFetcher fetchExplanationForComic:self.comic];
 }
@@ -72,9 +74,9 @@
 {
     NSString *headerImage = @"<p style=\"text-align: center;\"><a href=\"/wiki/index.php?title=Main_Page\" title=\"Visit the main page\"><img style=\"border: none;\" src=\"/wiki/skins/common/images/explainxkcd.png\"></a></p>";
     NSString *explanationHTML = [headerImage stringByAppendingString:self.comic.explanation];
-        
+
     [self.explanationView loadHTMLString:explanationHTML baseURL:[NSURL URLWithString:@"http://www.explainxkcd.com"]];
-    [self.view addSubview:self.explanationView];
+    self.explanationView.hidden = NO;
 }
 
 - (void)explainXkcdContentFetcher:(ExplainXkcdContentFetcher *)fetcher didFetchExplanationForComic:(Comic *)comic
