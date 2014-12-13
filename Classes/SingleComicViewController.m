@@ -51,7 +51,7 @@
 - (id)initWithComic:(Comic *)comicToView {
   if(self = [super initWithNibName:nil bundle:nil]) {
     _comic = comicToView;
-    self.title = [NSString stringWithFormat:@"%i. %@", _comic.number.integerValue, _comic.name];
+    self.title = [NSString stringWithFormat:@"%li. %@", (long)_comic.number.integerValue, _comic.name];
   }
   return self;
 }
@@ -173,7 +173,7 @@
   self.view.accessibilityHint = nil;
 
   if(self.comic.transcript.length == 0) {
-    self.view.accessibilityLabel = @"Transcript not available";
+    self.view.accessibilityLabel = NSLocalizedString(@"Transcript not available", @"missing transcript accessibility label") ;
     NSLog(@"Missing transcript for comic %li", (long)self.comic.number.integerValue);
   } else {
     self.view.accessibilityLabel = self.comic.transcript; // TODO: Clean up the transcript some for a more pleasant listening experience
@@ -264,6 +264,9 @@
   [comicList.tableView selectRowAtIndexPath:[comicList indexPathForComicNumbered:[newComic.number integerValue]]
                                    animated:NO
                              scrollPosition:UITableViewScrollPositionMiddle];
+
+  // deselect any selected rows, to avoid ugliness (still kinda ugly, but it'll have to be good enough for now, need to release)
+  [comicList.tableView deselectRowAtIndexPath:[comicList.tableView indexPathForSelectedRow] animated:NO];
 }
 
 #pragma mark - Gesture recognizer callbacks
