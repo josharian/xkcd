@@ -77,7 +77,6 @@
 						self.comicTitleText = [NSString stringByCleaningHTML:[comicDictionary stringForKey:@"alt"]];
 						self.comicImageURL = [NSString stringByCleaningHTML:[comicDictionary stringForKey:@"img"]];
 						self.comicTranscript = [comicDictionary stringForKey:@"transcript"];
-						// TODO: use link/news to detect "large version" image urls
 					}
 				}
 			}

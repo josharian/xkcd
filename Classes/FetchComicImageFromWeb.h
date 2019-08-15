@@ -11,7 +11,7 @@
 @interface FetchComicImageFromWeb : NSOperation
 
 - (instancetype)initWithComicNumber:(NSInteger)number
-						   imageURL:(NSURL *)imageURL
+						   imageURL:(NSString *)imageURL
                          URLSession:(NSURLSession *)session
 				   completionTarget:(id)completionTarget
 							 action:(SEL)completionAction

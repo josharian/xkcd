@@ -87,10 +87,11 @@
   }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 
     [self calculateZoomScaleAndAnimate:animated];
+    [self setDefaultZoom];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -161,10 +162,6 @@
 	}
 	[self.imageScroller addSubview:self.contentView];
 	
-	if ([Preferences defaultPreferences].openZoomedOut) {
-		[self.imageScroller setZoomScale:self.imageScroller.minimumZoomScale animated:NO];
-	}
-	
 	UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showTitleText:)];
 	longPress.minimumPressDuration = 0.5f;
 	[self.view addGestureRecognizer:longPress];
@@ -186,6 +183,20 @@
 	} else {
 		self.view.accessibilityLabel = self.comic.transcript; // TODO: Clean up the transcript some for a more pleasant listening experience
 	}
+}
+
+- (void) setDefaultZoom {
+    if ([Preferences defaultPreferences].openZoomedOut) {
+        [self.imageScroller setZoomScale:self.imageScroller.minimumZoomScale animated:NO];
+    } else {
+        // 1084 was the first comic to use 2x
+        // TODO: Have the comic image fetcher indicate whether
+        // the image is actually 2x or not?
+        bool at2x = ([self.comic.number integerValue] >= 1084);
+        CGFloat defaultZoom = (at2x ? 0.5 : 1.0);
+        defaultZoom = MAX(defaultZoom, self.imageScroller.minimumZoomScale);
+        [self.imageScroller setZoomScale:defaultZoom animated:NO];
+    }
 }
 
 - (void) calculateZoomScaleAndAnimate:(BOOL)animate {
@@ -320,8 +331,9 @@
                         context:(id)context {
   self.imageFetcher = nil;
   [self.loadingView removeFromSuperview];
-  [self displayComicImage];
   [self calculateZoomScaleAndAnimate:NO];
+  [self displayComicImage];
+  [self setDefaultZoom];
 }
 
 - (void)singleComicImageFetcher:(SingleComicImageFetcher *)fetcher

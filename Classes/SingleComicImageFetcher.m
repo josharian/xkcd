@@ -40,9 +40,8 @@
 
 - (void)fetchImageForComic:(Comic *)comic context:(id)context {
   if (comic.imageURL) {
-    NSURL *comicImageURL = [NSURL URLWithString:comic.imageURL];
     FetchComicImageFromWeb *fetchOperation = [[FetchComicImageFromWeb alloc] initWithComicNumber:[comic.number integerValue]
-                                                                                         imageURL:comicImageURL
+                                                                                         imageURL:comic.imageURL
                                                                                       URLSession:self.URLSession
                                                                                  completionTarget:self
                                                                                            action:@selector(didCompleteFetchOperation:)
